@@ -391,7 +391,8 @@ sub cmd_exec {
 
     # PERL5LIB takes care of arch
     my $path = $env->install_path;
-    local $ENV{PERL5LIB} = "$path/lib/perl5";
+    my $lib  = $ENV{PERL5LIB} ? "$path/lib/perl5:$ENV{PERL5LIB}" : "$path/lib/perl5";
+    local $ENV{PERL5LIB} = $lib;
     local $ENV{PATH} = "$path/bin:$ENV{PATH}";
 
     if ($UseSystem) {
